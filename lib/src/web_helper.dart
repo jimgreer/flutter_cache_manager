@@ -136,6 +136,14 @@ class WebHelper {
       if (type.length == 2) {
         fileExtension = ".${type[1]}";
       }
+
+      // Horrible hack to deal with issue #74
+      //  https://github.com/renefloor/flutter_cache_manager/issues/74
+      // .mp3 files are put in the cache with a .mpeg extension, but iOS
+      // won't play a .mpeg.
+      if (fileExtension == '.mpeg') {
+        fileExtension = '.mp3';
+      }
     }
 
     var oldPath = cacheObject.relativePath;
